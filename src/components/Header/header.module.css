@@ -1,0 +1,86 @@
+.head{
+    height: 60px;
+    width: 100%;
+    background-color: #003566;
+    display: flex;
+    justify-content: space-between;
+    border: 0.2px solid #003566;
+
+}
+.logo{
+    margin-left: 20px;
+    height: 100%;
+    width: 250px;;
+    align-items: center;
+    display: flex;
+    
+    justify-content: flex-start;
+}
+.hlogo{
+
+    color: aliceblue;
+    text-align: center;
+    font-family: 'Vollkorn', serif;
+    font-size: 33px;
+}
+ .logospan{
+  color: #ffd60a;
+} 
+.nav{
+    /* position: absolute;*/
+    margin-right: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+color: aliceblue;
+}
+ .nav li {
+    list-style: none;
+    color: aliceblue;
+    padding: 8px 14px ;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    
+ }
+ li a{
+    color: #ffd60a;
+    text-decoration: none;
+ }
+ .imgcover{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #ffd60a;
+ }
+ .headtwo{
+    height: 56px;
+    background-color: #ffd60a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+ }
+ .opul{
+    height: 100%;
+    
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+ }
+ .opul li{
+    height: 110%;
+    padding: 17px;
+    width: 100px;
+    text-align: center;
+
+    text-decoration: none;
+    font-size: 22px;
+    list-style: none;
+    
+    border-right: 2px solid #ffd60a;
+    background-color: #003566;
+    color: #ffd60a;
+   
+ }
