@@ -1,0 +1,183 @@
+
+.headtwo{
+    height: 56px;
+    background-color: #ffd60a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+ }
+ .Links{
+    text-decoration: none;
+ }
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    --c:  #003566;
+    color: var(--c);
+    font-size: 16px;
+    border: 0.2em solid var(--c);
+    border-radius: 0.5em;
+    width: 9em;
+    height: 2.9em;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: sans-serif;
+    letter-spacing: 0.1em;
+    text-align: center;
+    line-height: 3em;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.5s;
+    margin: 1em;
+}
+
+nav ul li span {
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    background-color: var(--c);
+    transform: translateY(150%);
+    border-radius: 50%;
+    left: calc((var(--n) - 1) * 25%);
+    transition: 0.5s;
+    transition-delay: calc((var(--n) - 1) * 0.1s);
+    z-index: -1;
+}
+
+nav ul li:hover {
+    /* color: black;
+     */
+     color: #ffd60a;
+}
+
+nav ul li:hover span {
+    transform: translateY(0) scale(2);
+}
+
+nav ul li span:nth-child(1) {
+    --n: 1;
+    color: #ffd60a;
+}
+
+nav ul li span:nth-child(2) {
+    --n: 2;
+    color: #ffd60a;
+
+}
+
+nav ul li span:nth-child(3) {
+    --n: 3;
+    color: #ffd60a;
+}
+
+nav ul li span:nth-child(4) {
+    --n: 4;
+    color: #ffd60a;
+}
+/* -----------------_______ */
+/* @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap'); */
+:root{
+    --primary-color: rgba(20, 177, 177, 0.5);
+    --overlay-color: rgba(24,39,51,0.85);
+    --menu-speed: 0.75s;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Staatliches', cursive;
+    line-height: 1.4;
+}
+.container{
+    max-width: 960px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 3rem;
+}
+.showcase{
+    /* background-color: var(--primary-color); */
+    color: #fff;
+    height: 100vh;
+    position: relative;
+}
+.showcase:before{
+    content: '';
+    background: url('https://images.pexels.com/photos/37839/pexels-photo-37839.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center/cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.showcase .showcase-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+.showcase h1{
+    font-size: 4rem;
+}
+.showcase p{
+    font-size: 1.3rem;
+    font-family: 'Oswald', sans-serif;
+}
+.btnn{
+    display: inline-block;
+    border: none;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1rem;
+    text-decoration: none;
+    transition: opacity 1s ease-in;
+    border-radius: 2rem;
+}
+.btnn:hover{
+    opacity: 0.7;
+}
+.contact-links{
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    max-width: 980px;
+    flex-wrap: wrap;
+    margin-left: 54.5rem; 
+    margin-top: -12rem;
+}
+.contact-details{
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease-out; 
+  }
+  .contact-details:hover{
+    transform: translateY(5px);
+  }
+  .btn{
+      display: inline-block;
+        padding-right: 1rem;
+        text-decoration: none;
+        color: #fff;
+  }
+
+@media screen and (max-width: 780px) {
+    .navsec{
+        /* display: none; */
+    }
+    
+  }
+  

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import Section from '../Section/Section'
 import './prodect.css'; // Import the CSS file for styling
 
-const Prodect = () => {
+export const Prodect = () => {
   const [data, setData] = useState([
     // Your data here, each object should have properties for each column
     { id: 1, col1: 'Value 1', col2: 'Value 2',col3: 'Value 2',col4: 'Value 2',col5: 'Value 2',col6: 'Value 2',col7: 'Value 2',col8: 'Value 2',col9: 'Value 2',col10: 'Value 2'},
@@ -22,6 +23,9 @@ const Prodect = () => {
 
   return (
 <div>
+
+<Section/>
+
     <div className="sect">
     <div className="search-container">
         <div className='searchdiv'>
@@ -47,7 +51,7 @@ const Prodect = () => {
           <th>Phone</th>
           <th>log</th>
           <th>lat</th>
-          <th>Catogeres</th>
+          <th>Center</th>
           {/* Add more column headers as needed */}
           <th>Edit</th>
           <th>Delete</th>
@@ -80,5 +84,3 @@ const Prodect = () => {
     </div>
   );
 };
-
-export default Prodect;

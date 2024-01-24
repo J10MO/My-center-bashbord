@@ -1,0 +1,37 @@
+.order-table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .order-table th, .order-table td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: left;
+  }
+  
+  .order-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .order-table tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  /* Status Styles */
+  .status-waiting {
+    color: #f39c12;
+  }
+  
+  .status-done {
+    color: #2ecc71;
+  }
+  
+  .status-cancelled {
+    color: #e74c3c;
+  }

@@ -1,10 +1,13 @@
 import React from 'react'
 // import style from './user.module.css'
 import './user.css'
+import { Link } from 'react-router-dom'
+import Section from '../Section/Section'
 
-const User = () => {
+export const User = () => {
   return (
     <div>
+      <Section/>
       {/* <div className={style.container}>
   <h2>Responsive Tables Using LI <small>Triggers on 767px</small></h2>
   <ul className={style.responsive_table}>
@@ -52,8 +55,8 @@ const User = () => {
     </li>
   </ul>
 </div>
+
+<Link></Link>
     </div>
   )
 }
-
-export default User
