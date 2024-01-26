@@ -1,45 +1,17 @@
-
-import React , { useState, useEffect } from 'react';
-import './Cato.css'
+import React from 'react'
+import './Adv.css'
 import Section from '../Section/Section';
-import axios from 'axios';
 
 const tableData = [
-    { id: 1, name: 'Item 1', logo: 'logo1.png' },
-    { id: 2, name: 'Item 2', logo: 'logo2.png' },
-    { id: 3, name: 'Item 3', logo: 'logo3.png' },
+    { id: 1, name: 'Item 1',id:'1', logo: 'logo1.png' },
+    { id: 2, name: 'Item 2',id:'2', logo: 'logo2.png' },
+    { id: 3, name: 'Item 3',id:'3', logo: 'logo3.png' },
   ];
-const Cato = () => {
 
-
-
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-   useEffect(() => {
-    axios.get('http://localhost:3000/api/v1/categories/show')
-      .then(response => {
-        setData(response.data);
-        setLoading(false);
-      })
-      .catch(error => {
-        setError(error);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error.message}</p>;
-  }
-
-
+const Offer = () => {
   return (
     <div>
+      <div>
         <Section/>
         
         <div className='container'>
@@ -61,17 +33,20 @@ const Cato = () => {
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Logo</th>
+            <th>IMG</th>
+            <th>Prodect id</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {data.map(item => (
+          {tableData.map(item => (
             <tr key={item.id}>
-              <td>{item.cat_id}</td>
+              <td>{item.id}</td>
               <td>{item.name}</td>
-              <td><img src={item.img} alt="" className='clogo'/> </td>
-              
+              <td>
+                <img src={item.logo} alt={`Logo for ${item.name}`} className="logo-img" />
+              </td>
+              <td>{item.id}</td>
               <td className="action-cell">
                 <button className="delete-button" onClick={() => handleDelete(item.id)}>
                   Delete
@@ -91,7 +66,8 @@ const Cato = () => {
     </div>
     </div>
     </div>
+    </div>
   )
 }
 
-export default Cato
+export default Offer

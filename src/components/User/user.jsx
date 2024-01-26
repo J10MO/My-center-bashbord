@@ -1,25 +1,46 @@
-import React from 'react'
-// import style from './user.module.css'
+
+import React , { useState, useEffect } from 'react';
 import './user.css'
 import { Link } from 'react-router-dom'
 import Section from '../Section/Section'
+import axios from 'axios';
 
 export const User = () => {
+
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+   useEffect(() => {
+    axios.get('http://localhost:3000/api/v1/user/users')
+      .then(response => {
+        setData(response.data);
+        setLoading(false);
+      })
+      .catch(error => {
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+
+
+
+
+
   return (
     <div>
       <Section/>
-      {/* <div className={style.container}>
-  <h2>Responsive Tables Using LI <small>Triggers on 767px</small></h2>
-  <ul className={style.responsive_table}>
-    <li className={style.table-header}>
-      <div className={style.col_1}>Job Id</div>
-      <div className={style.col_2}>Customer Name</div>
-      <div className={style.col_3}>Amount Due</div>
-      <div className={style.col_4}>Payment Status</div>
-    </li>
     
-  </ul>
-</div> */}
 <div class="container">
   <h2>USERs TABLE </h2>
   <ul class="responsive-table">
@@ -29,34 +50,17 @@ export const User = () => {
       <div class="col col-3">Email</div>
       <div class="col col-4">Phone Number</div>
     </li>
+   { data.map(item => (
     <li class="table-row">
-      <div class="col col-1" data-label="Job Id">1</div>
-      <div class="col col-2" data-label="Customer Name">John Doe</div>
-      <div class="col col-3" data-label="Amount">g@jjj.com</div>
-      <div class="col col-4" data-label="Payment Status">07717288459</div>
+      <div class="col col-1" data-label="Job Id">{item.user_id}</div>
+      <div class="col col-2" data-label="Customer Name">{item.name}</div>
+      <div class="col col-4" data-label="Payment Status">{item.email}</div>
+      <div class="col col-3" data-label="Amount">{item.phone}</div>
     </li>
-    <li class="table-row">
-      <div class="col col-1" data-label="Job Id">2</div>
-      <div class="col col-2" data-label="Customer Name">Jennifer Smith</div>
-      <div class="col col-3" data-label="Amount">h@gmail.com</div>
-      <div class="col col-4" data-label="Payment Status">07522222</div>
-    </li>
-    <li class="table-row">
-      <div class="col col-1" data-label="Job Id">3</div>
-      <div class="col col-2" data-label="Customer Name">John Smith</div>
-      <div class="col col-3" data-label="Amount">h@gmail.com</div>
-      <div class="col col-4" data-label="Payment Status">0780456+</div>
-    </li>
-    <li class="table-row">
-      <div class="col col-1" data-label="Job Id">4</div>
-      <div class="col col-2" data-label="Customer Name">John Carpenter</div>
-      <div class="col col-3" data-label="Amount">h@gmail.com</div>
-      <div class="col col-4" data-label="Payment Status">044444</div>
-    </li>
+    ))}
   </ul>
 </div>
 
-<Link></Link>
     </div>
   )
 }

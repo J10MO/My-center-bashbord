@@ -3,6 +3,10 @@
   width: 100%;
   overflow-x: auto;
 }
+.clogo{
+  width: 120px;
+  height: 120px;
+}
 
 .custom-table {
   width: 100%;

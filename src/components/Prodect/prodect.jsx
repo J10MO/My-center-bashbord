@@ -1,19 +1,59 @@
-import React, { useState } from 'react';
+import React , { useState, useEffect } from 'react';
 import Section from '../Section/Section'
 import './prodect.css'; // Import the CSS file for styling
+import axios from 'axios';
 
 export const Prodect = () => {
-  const [data, setData] = useState([
-    // Your data here, each object should have properties for each column
-    { id: 1, col1: 'Value 1', col2: 'Value 2',col3: 'Value 2',col4: 'Value 2',col5: 'Value 2',col6: 'Value 2',col7: 'Value 2',col8: 'Value 2',col9: 'Value 2',col10: 'Value 2'},
-    { id: 2, col1: 'Value 3', col2: 'Value 4', /* ... */ },
-    // Add more rows as needed
-  ]);
 
-  const handleEdit = (id) => {
-    // Handle edit logic
-    console.log(`Editing row with id: ${id}`);
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+   useEffect(() => {
+    axios.get('http://localhost:3000/api/v1/sessions/show')
+      .then(response => {
+        setData(response.data);
+        setLoading(false);
+      })
+      .catch(error => {
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+
+
+
+
+
+  const handleEdit = () => {
+    // Clear the editing state and refetch the data
+    setEditingId(null);
+    axios.get('https://api.example.com/data')
+      .then(response => setData(response.data))
+      .catch(error => console.error('Error fetching data:', error));
   };
+
+  const startEditing = (id) => {
+    // Show a confirmation alert before editing
+    const shouldEdit = window.confirm('Are you sure you want to edit this row?');
+    if (shouldEdit) {
+      // Set the ID of the row to be edited
+      setEditingId(id);
+    }
+
+
+  }
+
 
   const handleDelete = (id) => {
     // Handle delete logic
@@ -45,13 +85,12 @@ export const Prodect = () => {
           <th>Prodect id</th>
           <th>prodect name</th>
           <th>cover</th>
-          <th>logo</th>
-          <th>Evaluetion</th>
+          <th>video</th>
+          <th>detils</th>
           <th>Work Time</th>
-          <th>Phone</th>
-          <th>log</th>
-          <th>lat</th>
-          <th>Center</th>
+          <th>evaluation</th>
+          <th>price</th>
+          <th>Center id</th>
           {/* Add more column headers as needed */}
           <th>Edit</th>
           <th>Delete</th>
@@ -59,24 +98,31 @@ export const Prodect = () => {
       </thead>
       <tbody>
         {data.map(row => (
-          <tr key={row.id}>
-            <td>{row.col1}</td>
-            <td>{row.col2}</td>
-            <td>{row.col3}</td>
-            <td>{row.col4}</td>
-            <td>{row.col5}</td>
-            <td>{row.col6}</td>
-            <td>{row.col7}</td>
-            <td>{row.col8}</td>
-            <td>{row.col9}</td>
-            <td>{row.col10}</td>
+          <tr key={row.ses_id}>
+            {/* <td>{editingId === item.id ? (
+                <EditForm data={item} onEdit={handleEdit} />
+              ) : (
+                row.ses_id
+              )}</td> */}
+            <td>{row.ses_id}</td>
+            <td>{row.ses_name}</td>
+            <td>{row.img}</td>
+            <td>{row.video}</td>
+            <td>{row.details}</td>
+            <td>{row.Session_time}</td>
+            <td>{row.evaluation}</td>
+            <td>{row.price}</td>
+            <td>{row.center_id}</td>
             {/* Add more columns as needed */}
             <td>
-              <button className="edit-btn" onClick={() => handleEdit(row.id)}>Edit</button>
-            </td>
+                {/* {editingId !== item.id && ( */}
+                  <button onClick={() => startEditing(item.id)}>Edit</button>
+                
+              </td>
             <td>
               <button className="delete-btn" onClick={() => handleDelete(row.id)}>Delete</button>
             </td>
+            
           </tr>
         ))}
       </tbody>
@@ -84,3 +130,44 @@ export const Prodect = () => {
     </div>
   );
 };
+// function EditForm({ data, onEdit }) {
+//   const [editedData, setEditedData] = useState({ ...data });
+
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setEditedData({ ...editedData, [name]: value });
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     // Make an API request to update the data in the database
+//     axios.put(`http://localhost:3000/api/v1/sessions/${data.id}`, editedData)
+//       .then(response => {
+//         // Handle successful update
+//         console.log('Data updated successfully:', response.data);
+//         // Notify the parent component that the data was edited
+//         onEdit();
+//       })
+//       .catch(error => {
+//         // Handle error
+//         console.error('Error updating data:', error);
+//       });
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <label>
+//         Name:
+//         <input
+//           type="text"
+//           name="name"
+//           value={editedData.name}
+//           onChange={handleInputChange}
+//         />
+//       </label>
+//       {/* Add more input fields based on your data structure */}
+//       <button type="submit">Update</button>
+//     </form>
+//   );
+//   }

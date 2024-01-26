@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './header.module.css'
 import { Link } from 'react-router-dom'
+import avatar from '../../assets/admin.avif'
 
 
 const Header = () => {
@@ -12,8 +13,8 @@ const Header = () => {
         </div>
         <ul className={`${style.nav}`}>
           <li><a href="/">Home</a></li>
-          <li><a href="#">admin name</a></li>
-          <li> <div className={style.imgcover}><image></image></div></li>
+          <li><a href="#">jasem mohammed</a></li>
+          <li> <div className={style.imgcover}><img src={avatar} className={style.avatar}/></div></li>
         </ul>
 
       </div>
