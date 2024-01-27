@@ -1,0 +1,72 @@
+.pmcontainer{
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.model{
+    border-radius: 5px;
+    padding: 2rem;
+    background-color: white;
+    width: 25em;
+  }
+ .pmcontainer table{
+    width: 100%;
+    background-color: aqua;
+    align-items: center;
+ }
+  .pmcontainer label{
+    font-weight: bold;
+  }
+  .form-grop{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+
+  }
+  .form-grop input{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    text-align: center;
+    height: 35px;
+    background-color: rgba(240, 248, 255, 0.707);
+    border: none;
+    box-shadow: 0 10px 8px #ddd;
+  }
+  .btn-grop{
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+  .btn-grop .sabmit-btn{
+    font: 1em sans-serif;
+    font-weight: bold;
+    background-color: #3a86ff;
+    border: none;
+    color: aliceblue;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 80px;
+    height: 40px;
+    border-radius: 9px;
+  }
+  .btn-grop .cancel-btn{
+    font: 1em sans-serif;
+    font-weight: bold;
+    background-color: #dc2f02;
+    border: none;
+    color: aliceblue;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 80px;
+    height: 40px;
+    border-radius: 9px;
+  }

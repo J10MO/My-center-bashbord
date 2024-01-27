@@ -5,6 +5,7 @@ import {Centert} from "./components/Center/Center";
 import Header  from "./components/Header/header.jsx";
 import Home from "./components/Home/home.jsx";
 import Order from "./components/Order/Order.jsx";
+import Model from "./components/Prodect/model/Model.jsx";
 import { Prodect } from "./components/Prodect/prodect";
 import Section from "./components/Section/Section.jsx";
 import { User } from "./components/User/user";
@@ -24,6 +25,10 @@ element:<User/>
   {
 path:'/prodect',
 element:<Prodect/>
+  },
+  {
+path:'/prodect/add',
+element:<Model/>
   },
   {
 path:'/catogares',

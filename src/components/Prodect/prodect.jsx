@@ -2,8 +2,11 @@ import React , { useState, useEffect } from 'react';
 import Section from '../Section/Section'
 import './prodect.css'; // Import the CSS file for styling
 import axios from 'axios';
+import Model from './model/Model';
+import { Link } from 'react-router-dom';
 
 export const Prodect = () => {
+  const  [modelopen,setmodeleopen]=useState(false);
 
 
   const [data, setData] = useState([]);
@@ -38,7 +41,7 @@ export const Prodect = () => {
   const handleEdit = () => {
     // Clear the editing state and refetch the data
     setEditingId(null);
-    axios.get('https://api.example.com/data')
+    axios.get('http://localhost:3000/api/v1/sessions/show')
       .then(response => setData(response.data))
       .catch(error => console.error('Error fetching data:', error));
   };
@@ -57,7 +60,7 @@ export const Prodect = () => {
 
   const handleDelete = (id) => {
     // Handle delete logic
-    setData(data.filter(item => item.id !== id));
+    setData(data.filter(item => item.ses_id !== id));
     console.log(`Deleting row with id: ${id}`);
   };
 
@@ -65,7 +68,9 @@ export const Prodect = () => {
 <div>
 
 <Section/>
-
+{modelopen&& <Model closemodal={()=>{
+  setmodeleopen(false);
+}}/>}
     <div className="sect">
     <div className="search-container">
         <div className='searchdiv'>
@@ -76,9 +81,10 @@ export const Prodect = () => {
 </svg></button>
 </div>
     </div>
-    <button className='add'>ADD +</button>
+    <button className='add' onClick={()=> setmodeleopen (true)} >
+       ADD +</button>
     </div>
-
+    
     <table className="data-table">
       <thead>
         <tr>
@@ -99,8 +105,8 @@ export const Prodect = () => {
       <tbody>
         {data.map(row => (
           <tr key={row.ses_id}>
-            {/* <td>{editingId === item.id ? (
-                <EditForm data={item} onEdit={handleEdit} />
+            {/* <td>{editingId === row.ses_id ? (
+                <EditForm data={row} onEdit={handleEdit} />
               ) : (
                 row.ses_id
               )}</td> */}
@@ -116,8 +122,8 @@ export const Prodect = () => {
             {/* Add more columns as needed */}
             <td>
                 {/* {editingId !== item.id && ( */}
-                  <button onClick={() => startEditing(item.id)}>Edit</button>
-                
+                  <button onClick={()=> setmodeleopen(true)}>Edit</button>
+             
               </td>
             <td>
               <button className="delete-btn" onClick={() => handleDelete(row.id)}>Delete</button>
@@ -130,44 +136,44 @@ export const Prodect = () => {
     </div>
   );
 };
-// function EditForm({ data, onEdit }) {
-//   const [editedData, setEditedData] = useState({ ...data });
+function EditForm({ data, onEdit }) {
+  const [editedData, setEditedData] = useState({ ...data });
 
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setEditedData({ ...editedData, [name]: value });
-//   };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedData({ ...editedData, [name]: value });
+  };
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-//     // Make an API request to update the data in the database
-//     axios.put(`http://localhost:3000/api/v1/sessions/${data.id}`, editedData)
-//       .then(response => {
-//         // Handle successful update
-//         console.log('Data updated successfully:', response.data);
-//         // Notify the parent component that the data was edited
-//         onEdit();
-//       })
-//       .catch(error => {
-//         // Handle error
-//         console.error('Error updating data:', error);
-//       });
-//   };
+    // Make an API request to update the data in the database
+    axios.put(`http://localhost:3000/api/v1/sessions/${data.id}`, editedData)
+      .then(response => {
+        // Handle successful update
+        console.log('Data updated successfully:', response.data);
+        // Notify the parent component that the data was edited
+        onEdit();
+      })
+      .catch(error => {
+        // Handle error
+        console.error('Error updating data:', error);
+      });
+  };
 
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <label>
-//         Name:
-//         <input
-//           type="text"
-//           name="name"
-//           value={editedData.name}
-//           onChange={handleInputChange}
-//         />
-//       </label>
-//       {/* Add more input fields based on your data structure */}
-//       <button type="submit">Update</button>
-//     </form>
-//   );
-//   }
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input
+          type="text"
+          name="name"
+          value={editedData.name}
+          onChange={handleInputChange}
+        />
+      </label>
+      {/* Add more input fields based on your data structure */}
+      <button type="submit">Update</button>
+    </form>
+  );
+  }
