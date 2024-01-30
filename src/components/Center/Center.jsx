@@ -2,6 +2,8 @@ import React , { useState, useEffect } from 'react';
 import Section from "../Section/Section";
 import "./Center.css";
 import axios from 'axios';
+import Model from './model/Model';
+import Edit from './model/edit';
 
 export const Centert = () => {
 
@@ -9,6 +11,8 @@ export const Centert = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const  [modelopen,setmodeleopen]=useState(false);
+  const  [editopen,seteditopen]=useState(false);
 
    useEffect(() => {
     axios.get('http://localhost:3000/api/v1/centers/show')
@@ -47,7 +51,13 @@ export const Centert = () => {
   return (
     <div>
       <Section />
-
+      {modelopen&& <Model closemodal={()=>{
+  setmodeleopen(false);
+}}/>}
+ {editopen&& <Edit closeedit={()=>{
+  seteditopen(false);
+}}/>}
+      <div className="sctcont">
       <div className="sect">
         <div className="search-container">
           <div className="searchdiv">
@@ -74,14 +84,14 @@ export const Centert = () => {
             </button>
           </div>
         </div>
-        <button className="add">ADD +</button>
+        <button className="add" onClick={()=> setmodeleopen(true)}>ADD +</button>
       </div>
-
+</div>
       <table className="data-table">
         <thead>
           <tr>
-            <th>Prodect id</th>
-            <th>prodect name</th>
+            <th>center id</th>
+            <th>center name </th>
             <th>cover</th>
             <th>logo</th>
             <th>Evaluetion</th>
@@ -114,7 +124,7 @@ export const Centert = () => {
               <td>{row.write_website}</td>
               {/* Add more columns as needed */}
               <td>
-                <button className="edit-btn" onClick={() => handleEdit(row.id)}>
+                <button className="edit-btn" onClick={() => seteditopen(true)}>
                   Edit
                 </button>
               </td>

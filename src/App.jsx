@@ -5,7 +5,9 @@ import {Centert} from "./components/Center/Center";
 import Header  from "./components/Header/header.jsx";
 import Home from "./components/Home/home.jsx";
 import Order from "./components/Order/Order.jsx";
+import Modelcenter from "./components/Prodect/model/Model.jsx";
 import Model from "./components/Prodect/model/Model.jsx";
+import Edit from "./components/Prodect/model/edit.jsx";
 import { Prodect } from "./components/Prodect/prodect";
 import Section from "./components/Section/Section.jsx";
 import { User } from "./components/User/user";
@@ -27,8 +29,16 @@ path:'/prodect',
 element:<Prodect/>
   },
   {
+path:'/prodect/edit/:id',
+element:<Edit/>
+  },
+  {
 path:'/prodect/add',
 element:<Model/>
+  },
+  {
+path:'/center/add',
+element:<Modelcenter/>
   },
   {
 path:'/catogares',

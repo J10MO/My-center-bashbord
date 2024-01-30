@@ -4,10 +4,16 @@ import './prodect.css'; // Import the CSS file for styling
 import axios from 'axios';
 import Model from './model/Model';
 import { Link } from 'react-router-dom';
+// import  {useHistory}  from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Edit from './model/edit';
+
 
 export const Prodect = () => {
+  const navigate = useNavigate();
   const  [modelopen,setmodeleopen]=useState(false);
-
+  const  [editopen,seteditopen]=useState(false);
+  // const history = useHistory();
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,32 +42,42 @@ export const Prodect = () => {
 
 
 
+  // const Handeleditchange = (id) => {
+  //   // Show a confirmation alert before editing
+  //   history.push(`edit/${id}`);
+    
+  // };
 
+ 
+ 
+ const handleDelete = (ses_id) => {
+  console.log("delete button clicked");
+  fetch(`http://localhost:3000/api/v1/sessions/delete/${ses_id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      // Include any additional headers as needed
+    },
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Handle the successful deletion
+      onDeleteSuccess(data.message);
+    })
+    .catch(error => {
+      console.error('Error deleting session:', error);
+      onDeleteError('Failed to delete session');
+    });
+      // Replace 'http://localhost:3000/api/v1/sessions/delete/' with your actual API endpoint
+      // fetch(`http://localhost:3000/api/v1/sessions/delete/${ses_id}`, {
 
-  const handleEdit = () => {
-    // Clear the editing state and refetch the data
-    setEditingId(null);
-    axios.get('http://localhost:3000/api/v1/sessions/show')
-      .then(response => setData(response.data))
-      .catch(error => console.error('Error fetching data:', error));
-  };
-
-  const startEditing = (id) => {
-    // Show a confirmation alert before editing
-    const shouldEdit = window.confirm('Are you sure you want to edit this row?');
-    if (shouldEdit) {
-      // Set the ID of the row to be edited
-      setEditingId(id);
-    }
-
-
-  }
-
-
-  const handleDelete = (id) => {
-    // Handle delete logic
-    setData(data.filter(item => item.ses_id !== id));
-    console.log(`Deleting row with id: ${id}`);
+       
+    
   };
 
   return (
@@ -71,6 +87,10 @@ export const Prodect = () => {
 {modelopen&& <Model closemodal={()=>{
   setmodeleopen(false);
 }}/>}
+ {editopen&& <Edit closeedit={()=>{
+  seteditopen(false);
+}}/>}
+<div className="sctcont">
     <div className="sect">
     <div className="search-container">
         <div className='searchdiv'>
@@ -83,6 +103,7 @@ export const Prodect = () => {
     </div>
     <button className='add' onClick={()=> setmodeleopen (true)} >
        ADD +</button>
+    </div>
     </div>
     
     <table className="data-table">
@@ -112,8 +133,8 @@ export const Prodect = () => {
               )}</td> */}
             <td>{row.ses_id}</td>
             <td>{row.ses_name}</td>
-            <td>{row.img}</td>
-            <td>{row.video}</td>
+            <td><img  src={row.img} alt="" className='pimg' /> </td>
+            <td><img src={row.vedio} alt="" className='pimg' /> </td>
             <td>{row.details}</td>
             <td>{row.Session_time}</td>
             <td>{row.evaluation}</td>
@@ -122,11 +143,13 @@ export const Prodect = () => {
             {/* Add more columns as needed */}
             <td>
                 {/* {editingId !== item.id && ( */}
-                  <button onClick={()=> setmodeleopen(true)}>Edit</button>
+                <button onClick={() => { setmodeleopen(true);handleEditClick(row.ses_id);  }} className='edit-btn'>
+  Edit
+</button>
              
               </td>
             <td>
-              <button className="delete-btn" onClick={() => handleDelete(row.id)}>Delete</button>
+              <button className="delete-btn" onClick={() => handleDelete(row.ses_id)}>Delete</button>
             </td>
             
           </tr>
@@ -136,44 +159,3 @@ export const Prodect = () => {
     </div>
   );
 };
-function EditForm({ data, onEdit }) {
-  const [editedData, setEditedData] = useState({ ...data });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditedData({ ...editedData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Make an API request to update the data in the database
-    axios.put(`http://localhost:3000/api/v1/sessions/${data.id}`, editedData)
-      .then(response => {
-        // Handle successful update
-        console.log('Data updated successfully:', response.data);
-        // Notify the parent component that the data was edited
-        onEdit();
-      })
-      .catch(error => {
-        // Handle error
-        console.error('Error updating data:', error);
-      });
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input
-          type="text"
-          name="name"
-          value={editedData.name}
-          onChange={handleInputChange}
-        />
-      </label>
-      {/* Add more input fields based on your data structure */}
-      <button type="submit">Update</button>
-    </form>
-  );
-  }

@@ -3,17 +3,19 @@ import "./Model.css";
 import { Axios } from "axios";
 import axios from "axios";
 import { useState, useEffect } from "react";
-const Modelcenter = ({ closemodal }) => {
+const Model = ({ closemodal }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [ses_name, setName] = useState("");
-  const [img, setImg] = useState("");
-  const [video, setVideo] = useState("");
+  const [centername, setName] = useState("");
+  const [cover, setcover] = useState("");
+  const [logo, setlogo] = useState("");
+  const [Evaluetion, setEvaluetion] = useState("");
+  const [Work, setWork] = useState("");
   const [details, setdetails] = useState("");
-  const [center_id, setcenter_id] = useState("");
-  const [evaluation, setevaluation] = useState("");
-  const [price, setprice] = useState("");
-  const [session_time, setsession_time] = useState("");
-  const [nu_ssession, setnu_ssession] = useState("");
+  const [Phone, setPhone] = useState("");
+  const [lng, setlog] = useState("");
+  const [lat, setlat] = useState("");
+  const [cat_id, setCenter] = useState("");
+  const [write_website, setwrite_website] = useState("");
 
   // const handelsabmit =(event)=>{
   //   event.preventDefault();
@@ -28,28 +30,30 @@ const Modelcenter = ({ closemodal }) => {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      ses_name,
-      img,
-      video,
+      centername,
+      cover,
+      logo,
+      Evaluetion,
+      Work,
       details,
-      center_id,
-      evaluation,
-      price,
-      session_time,
-      nu_ssession,
+      Phone,
+      lng,
+      lat,
+      cat_id,
+      write_website,
     });
 
     var requestOptions = {
-      method: "put",
+      method: "post",
       headers: myHeaders,
       body: raw,
       redirect: "follow",
     };
 
-    fetch("http://localhost:3000/api/v1/sessions/add", requestOptions)
-      .then((response) => response.json())
-      
-  }
+    fetch("http://localhost:3000/api/v1/centers/add", requestOptions).then(
+      (response) => response.json()
+    );
+  };
 
   return (
     <div
@@ -70,27 +74,27 @@ const Modelcenter = ({ closemodal }) => {
             <br />
           </div>
           <div className="form-grop">
-            <label htmlFor="name" onChange={(e) => setImg(e.target.value)}>
+            <label htmlFor="name" onChange={(e) => setcover(e.target.value)}>
               cover
             </label>
             <input type="text" id="cover" />
             <br />
           </div>
           <div className="form-grop">
-            <label htmlFor="name">video</label>
+            <label htmlFor="name">Logo</label>
             <input
               type="text"
               id="video"
-              onChange={(e) => setVideo(e.target.value)}
+              onChange={(e) => setlogo(e.target.value)}
             />
             <br />
           </div>
           <div className="form-grop">
-            <label htmlFor="name">detils</label>
+            <label htmlFor="name">Evaluetion</label>
             <input
               type="text"
               id="detils"
-              onChange={(e) => setdetails(e.target.value)}
+              onChange={(e) => setEvaluetion(e.target.value)}
             />
             <br />
           </div>
@@ -99,47 +103,77 @@ const Modelcenter = ({ closemodal }) => {
             <input
               type="text"
               id="Work Time"
-              onChange={(e) => setsession_time(e.target.value)}
+              onChange={(e) => setWork(e.target.value)}
             />
             <br />
           </div>
           <div className="form-grop">
-            <label htmlFor="name">evaluation</label>
+            <label htmlFor="name">Detiles</label>
             <input
               type="text"
               id="evaluation"
-              onChange={(e) => setevaluation(e.target.value)}
+              onChange={(e) => setdetails(e.target.value)}
             />
             <br />
           </div>
           <div className="form-grop">
-            <label htmlFor="name">price</label>
+            <label htmlFor="name">phone</label>
             <input
               type="text"
               id="price"
-              onChange={(e) => setprice(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
             />
             <br />
           </div>
+          <div className="loglat">
           <div className="form-grop">
-            <label htmlFor="name">number</label>
+            <label htmlFor="name">Log</label>
             <input
               type="text"
               id="Center"
-              onChange={(e) => setnu_ssession(e.target.value)}
+              onChange={(e) => setlog(e.target.value)}
+            />
+             
+          </div>
+          <div className="form-grop">
+            <label htmlFor="name">lat</label>
+            <input
+              type="text"
+              id="Center"
+              onChange={(e) => setlat(e.target.value)}
+            />
+           
+          </div> 
+          
+          </div>
+          {/* <div className="form-grop">
+            <label htmlFor="name">lat</label>
+            <input
+              type="text"
+              id="Center"
+              onChange={(e) => setlat(e.target.value)}
             />
             <br />
-          </div>
+          </div> */}
           <div className="form-grop">
             <label htmlFor="name">Center</label>
             <input
               type="text"
               id="Center"
-              onChange={(e) => setcenter_id(e.target.value)}
+              onChange={(e) => setCenter(e.target.value)}
             />
             <br />
           </div>
-          
+          <div className="form-grop">
+            <label htmlFor="name">write_website</label>
+            <input
+              type="text"
+              id="Center"
+              onChange={(e) => set(e.target.value)}
+            />
+            <br />
+          </div>
+
           <div className="btn-grop">
             <button id="sabmit" onClick={handleClick} className="sabmit-btn">
               sabmit
@@ -154,4 +188,4 @@ const Modelcenter = ({ closemodal }) => {
   );
 };
 
-export default Modelcenter;
+export default Model;

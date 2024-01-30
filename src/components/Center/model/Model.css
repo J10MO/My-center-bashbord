@@ -74,3 +74,9 @@
     height: 40px;
     border-radius: 9px;
   }
+  .loglat{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+  }

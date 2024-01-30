@@ -18,7 +18,10 @@
   }
   
   .custom-table th {
-    background-color: #f2f2f2;
+    background-color: #b9b2b2;
+  }
+  .custom-table td {
+    background-color: #fff;
   }
   
   .logo-img {
