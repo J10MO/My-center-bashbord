@@ -62,7 +62,7 @@ const Cato = () => {
             <th>ID</th>
             <th>Name</th>
             <th>Logo</th>
-            <th>Action</th>
+            <th className='act'>Action</th>
           </tr>
         </thead>
         <tbody>

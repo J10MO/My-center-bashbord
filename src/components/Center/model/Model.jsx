@@ -1,21 +1,22 @@
 import React from "react";
 import "./Model.css";
-import { Axios } from "axios";
 import axios from "axios";
 import { useState, useEffect } from "react";
 const Model = ({ closemodal }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [centername, setName] = useState("");
-  const [cover, setcover] = useState("");
-  const [logo, setlogo] = useState("");
-  const [Evaluetion, setEvaluetion] = useState("");
-  const [Work, setWork] = useState("");
-  const [details, setdetails] = useState("");
-  const [Phone, setPhone] = useState("");
-  const [lng, setlog] = useState("");
-  const [lat, setlat] = useState("");
-  const [cat_id, setCenter] = useState("");
-  const [write_website, setwrite_website] = useState("");
+  const [center_name, setName] = useState('');
+  const [cover_img, setcover] = useState('');
+  const [logo, setlogo] = useState('');
+  const [Evaluation, setEvaluetion] = useState('');
+  const [work_time, setWork] = useState('');
+  const [details, setdetails] = useState('');
+  const [phone, setPhone] = useState('');
+  const [lng, setlog] = useState('');
+  const [lat, setlat] = useState('');
+  const [cat_id, setCenter] = useState('');
+  const [write_website, setwrite_website] = useState('');
+  const doublelng = parseFloat(lng);
+  const doublelat = parseFloat(lat);
 
   // const handelsabmit =(event)=>{
   //   event.preventDefault();
@@ -28,31 +29,64 @@ const Model = ({ closemodal }) => {
     setIsLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-
+    
     var raw = JSON.stringify({
-      centername,
-      cover,
-      logo,
-      Evaluetion,
-      Work,
-      details,
-      Phone,
-      lng,
-      lat,
-      cat_id,
-      write_website,
+      "center_name": center_name,
+      "cover_img": cover_img,
+      "logo": logo,
+      "Evaluation": Evaluation,
+      "details":details ,
+      "work_time": work_time,
+      "phone":phone ,
+      "lng": lng,
+      "lat": lat,
+      "cat_id": cat_id,
+      "write_website": write_website
     });
-
+    
     var requestOptions = {
-      method: "post",
+      method: 'POST',
       headers: myHeaders,
       body: raw,
-      redirect: "follow",
+      redirect: 'follow'
     };
+    
+    fetch("http://localhost:3000/api/v1/centers/add", requestOptions)
+      .then(response => response.json())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+// let datax  = JSON.stringify({
+//   center_name,
+//   cover_img,
+//   logo,
+//   Evaluetion,
+//   work_time,
+//   details,
+//   Phone,
+//   lng,
+//   lat,
+//   cat_id,
+//   write_website
+// });
+// let config = {
+//   method: 'post',
+//   maxBodyLength: Infinity,
+//   url: 'http://localhost:3000/api/v1/centers/add/',
+//   headers: { 
+//     'Content-Type': 'application/json'
+//   },
+//   data : datax
+// };
 
-    fetch("http://localhost:3000/api/v1/centers/add", requestOptions).then(
-      (response) => response.json()
-    );
+// axios.request(config)
+// .then((response) => {
+//   console.log(JSON.stringify(response.data));
+// })
+// .catch((error) => {
+//   console.log(error);
+// });
+
+   
   };
 
   return (
@@ -67,115 +101,105 @@ const Model = ({ closemodal }) => {
           <div className="form-grop">
             <label htmlFor="name">Prodect Name</label>
             <input
-              type="text"
+              
               id="name"
               onChange={(e) => setName(e.target.value)}
             />
             <br />
           </div>
           <div className="form-grop">
-            <label htmlFor="name" onChange={(e) => setcover(e.target.value)}>
+            <label htmlFor="cover" onChange={(e) => setcover(e.target.value)}>
               cover
             </label>
-            <input type="text" id="cover" />
+            <input  id="cover" />
             <br />
           </div>
           <div className="form-grop">
-            <label htmlFor="name">Logo</label>
+            <label htmlFor="video">Logo</label>
             <input
-              type="text"
+              
               id="video"
               onChange={(e) => setlogo(e.target.value)}
             />
             <br />
           </div>
           <div className="form-grop">
-            <label htmlFor="name">Evaluetion</label>
+            <label htmlFor="evaluetion">Evaluetion</label>
             <input
-              type="text"
-              id="detils"
+              id="evaluetion"
               onChange={(e) => setEvaluetion(e.target.value)}
             />
             <br />
           </div>
           <div className="form-grop">
-            <label htmlFor="name">Work Time</label>
+            <label htmlFor="work">Work Time</label>
             <input
-              type="text"
-              id="Work Time"
+              
+              id="Work_Time"
               onChange={(e) => setWork(e.target.value)}
             />
             <br />
           </div>
           <div className="form-grop">
-            <label htmlFor="name">Detiles</label>
+            <label htmlFor="Detiles">Detiles</label>
             <input
-              type="text"
-              id="evaluation"
+            
+              id="Detiles"
               onChange={(e) => setdetails(e.target.value)}
             />
             <br />
           </div>
           <div className="form-grop">
-            <label htmlFor="name">phone</label>
+            <label htmlFor="phone">phone</label>
             <input
-              type="text"
-              id="price"
+      
+              id="phone"
               onChange={(e) => setPhone(e.target.value)}
             />
             <br />
           </div>
           <div className="loglat">
           <div className="form-grop">
-            <label htmlFor="name">Log</label>
+            <label htmlFor="lng">Lng</label>
             <input
-              type="text"
-              id="Center"
+
+              id="lng"
               onChange={(e) => setlog(e.target.value)}
             />
              
           </div>
           <div className="form-grop">
-            <label htmlFor="name">lat</label>
+            <label htmlFor="lat">lat</label>
             <input
-              type="text"
-              id="Center"
+              
+              id="lat"
               onChange={(e) => setlat(e.target.value)}
             />
            
           </div> 
           
           </div>
-          {/* <div className="form-grop">
-            <label htmlFor="name">lat</label>
-            <input
-              type="text"
-              id="Center"
-              onChange={(e) => setlat(e.target.value)}
-            />
-            <br />
-          </div> */}
           <div className="form-grop">
-            <label htmlFor="name">Center</label>
+            <label htmlFor="cat">catogares</label>
             <input
-              type="text"
-              id="Center"
+              
+              id="catogares"
               onChange={(e) => setCenter(e.target.value)}
             />
             <br />
           </div>
           <div className="form-grop">
-            <label htmlFor="name">write_website</label>
+            <label htmlFor="web">write_website</label>
             <input
-              type="text"
-              id="Center"
-              onChange={(e) => set(e.target.value)}
+              
+              id="web"
+              onChange={(e) => setwrite_website(e.target.value)}
             />
             <br />
           </div>
 
           <div className="btn-grop">
-            <button id="sabmit" onClick={handleClick} className="sabmit-btn">
+            <button  onClick={handleClick} className="sabmit-btn">
               sabmit
             </button>
             <button onClick={closemodal} className="cancel-btn">

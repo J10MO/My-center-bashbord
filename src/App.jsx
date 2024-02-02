@@ -1,11 +1,11 @@
 import "./App.css";
 import Offer from "./components/Adv/Adv.jsx";
 import Cato from "./components/Cato/Cato.jsx";
-import {Centert} from "./components/Center/Center";
+import {Center} from "./components/Center/Center";
 import Header  from "./components/Header/header.jsx";
 import Home from "./components/Home/home.jsx";
 import Order from "./components/Order/Order.jsx";
-import Modelcenter from "./components/Prodect/model/Model.jsx";
+import Modelcenter from "./components/Center/model/Model.jsx";
 import Model from "./components/Prodect/model/Model.jsx";
 import Edit from "./components/Prodect/model/edit.jsx";
 import { Prodect } from "./components/Prodect/prodect";
@@ -36,10 +36,7 @@ element:<Edit/>
 path:'/prodect/add',
 element:<Model/>
   },
-  {
-path:'/center/add',
-element:<Modelcenter/>
-  },
+ 
   {
 path:'/catogares',
 element:<Cato/>
@@ -51,8 +48,12 @@ element:<Order/>
   },
   {
     path:'/Center',
-    element:<Centert/>
+    element:<Center/>
     },
+     {
+path:'/center/add',
+element:<Modelcenter/>
+  },
   {
     path:'/Offer',
     element:<Offer/>

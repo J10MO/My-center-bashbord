@@ -4,26 +4,39 @@ import "./Center.css";
 import axios from 'axios';
 import Model from './model/Model';
 import Edit from './model/edit';
+import { Link } from 'react-router-dom';
 
-export const Centert = () => {
+export const Center = () => {
 
 
   const [data, setData] = useState([]);
+  const [datadelete, setDatadelete] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const  [modelopen,setmodeleopen]=useState(false);
   const  [editopen,seteditopen]=useState(false);
 
    useEffect(() => {
-    axios.get('http://localhost:3000/api/v1/centers/show')
-      .then(response => {
-        setData(response.data);
-        setLoading(false);
-      })
-      .catch(error => {
-        setError(error);
-        setLoading(false);
-      });
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    
+    fetch("http://localhost:3000/api/v1/centers/show", requestOptions)
+      .then(response => response.json())
+      .then(result => {setData(result) ,setLoading(false)})
+      
+      .catch(error => setError( error));
+
+    // axios.get('http://localhost:3000/api/v1/centers/show')
+    //   .then(response => {
+    //     setData(response.data);
+    //     setLoading(false);
+    //   })
+    //   .catch(error => {
+    //     setError(error);
+    //     setLoading(false);
+    //   });
   }, []);
 
   if (loading) {
@@ -44,9 +57,14 @@ export const Centert = () => {
   };
 
   const handleDelete = (id) => {
-    // Handle delete logic
-    setData(data.filter((item) => item.id !== id));
-    console.log(`Deleting row with id: ${id}`);
+    var requestOptions = {
+      method: 'DELETE',
+      redirect: 'follow'
+    };
+    
+    fetch(`http://localhost:3000/api/v1/centers/delete/${id}`, requestOptions)
+      .then(result =>  setData(data.filter((item) => item.center_id !== id)))
+      
   };
   return (
     <div>
@@ -118,20 +136,20 @@ export const Centert = () => {
               <td>{row.work_time}</td>
               <td>{row.details}</td>
               <td>{row.phone}</td>
-              <td>{row.lag}</td>
+              <td>{row.lng}</td>
               <td>{row.lat}</td>
               <td>{row.cat_id}</td>
               <td>{row.write_website}</td>
               {/* Add more columns as needed */}
               <td>
-                <button className="edit-btn" onClick={() => seteditopen(true)}>
+               <button className="edit-btn" onClick={() => seteditopen(true)}>
                   Edit
                 </button>
               </td>
               <td>
                 <button
                   className="delete-btn"
-                  onClick={() => handleDelete(row.id)}
+                  onClick={() => handleDelete(row.center_id)}
                 >
                   Delete
                 </button>

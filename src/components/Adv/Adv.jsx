@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Adv.css'
 import Section from '../Section/Section';
+import { useState } from 'react';
+ 
 
-const tableData = [
-    { id: 1, name: 'Item 1',id:'1', logo: 'logo1.png' },
-    { id: 2, name: 'Item 2',id:'2', logo: 'logo2.png' },
-    { id: 3, name: 'Item 3',id:'3', logo: 'logo3.png' },
-  ];
 
 const Offer = () => {
+  
+  const [Data,setData]=useState([]);
+
+  useEffect(()=>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("http://localhost:3000/api/v1/advertisements/show", requestOptions)
+    .then(response => response.json())
+    .then(result => setData(result))
+    .catch(error => console.log('error', error));
+
+},[],);
+
   return (
     <div>
       <div>
@@ -35,18 +49,19 @@ const Offer = () => {
             <th>Name</th>
             <th>IMG</th>
             <th>Prodect id</th>
-            <th>Action</th>
+            <th className='act' >Action</th>
           </tr>
         </thead>
         <tbody>
-          {tableData.map(item => (
+          {Data.map(item => (
             <tr key={item.id}>
               <td>{item.id}</td>
               <td>{item.name}</td>
               <td>
-                <img src={item.logo} alt={`Logo for ${item.name}`} className="logo-img" />
+                <img src={item.img}  className="logo-img" />
               </td>
-              <td>{item.id}</td>
+              <td>{item.video}</td>
+              <td>{item.ses_id}</td>
               <td className="action-cell">
                 <button className="delete-button" onClick={() => handleDelete(item.id)}>
                   Delete

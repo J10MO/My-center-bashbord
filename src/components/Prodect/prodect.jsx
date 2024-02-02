@@ -10,12 +10,13 @@ import Edit from './model/edit';
 
 
 export const Prodect = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const  [modelopen,setmodeleopen]=useState(false);
   const  [editopen,seteditopen]=useState(false);
   // const history = useHistory();
 
   const [data, setData] = useState([]);
+  const [datadelete, setDatadelete] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -50,35 +51,45 @@ export const Prodect = () => {
 
  
  
- const handleDelete = (ses_id) => {
-  console.log("delete button clicked");
-  fetch(`http://localhost:3000/api/v1/sessions/delete/${ses_id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      // Include any additional headers as needed
-    },
-  })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      // Handle the successful deletion
-      onDeleteSuccess(data.message);
-    })
-    .catch(error => {
-      console.error('Error deleting session:', error);
-      onDeleteError('Failed to delete session');
-    });
-      // Replace 'http://localhost:3000/api/v1/sessions/delete/' with your actual API endpoint
-      // fetch(`http://localhost:3000/api/v1/sessions/delete/${ses_id}`, {
+//  const handleDelete = (ses_id) => {
+//   console.log("delete button clicked");
+//   fetch(`http://localhost:3000/api/v1/sessions/delete/${ses_id}`, {
+//     method: 'DELETE',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       // Include any additional headers as needed
+//     },
+//   })
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error(`HTTP error! Status: ${response.status}`);
+//       }
+//       return response.json();
+//     })
+//     .then(data => {
+//       // Handle the successful deletion
+//       onDeleteSuccess(data.message);
+//     })
+//     .catch(error => {
+//       console.error('Error deleting session:', error);
+//       onDeleteError('Failed to delete session');
+//     });
+//       // Replace 'http://localhost:3000/api/v1/sessions/delete/' with your actual API endpoint
+//       // fetch(`http://localhost:3000/api/v1/sessions/delete/${ses_id}`, {
 
        
     
+//   };
+const handleDelete = (id) => {
+  var requestOptions = {
+    method: 'DELETE',
+    redirect: 'follow'
   };
+  
+  fetch(`http://localhost:3000/api/v1/sessions/delete/${id}`, requestOptions)
+    .then(response =>setData(data.filter((item)=>item.ses_id!=id)))
+    
+};
 
   return (
 <div>
@@ -143,9 +154,9 @@ export const Prodect = () => {
             {/* Add more columns as needed */}
             <td>
                 {/* {editingId !== item.id && ( */}
-                <button onClick={() => { setmodeleopen(true);handleEditClick(row.ses_id);  }} className='edit-btn'>
+              <Link to={`/prodect/edit/${row.ses_id}`}>  <button onClick={() => { seteditopen(true)  }} className='edit-btn'>
   Edit
-</button>
+</button></Link>
              
               </td>
             <td>

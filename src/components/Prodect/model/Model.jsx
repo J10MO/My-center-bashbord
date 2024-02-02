@@ -15,6 +15,7 @@ const Modelcenter = ({ closemodal }) => {
   const [session_time, setsession_time] = useState("");
   const [nu_ssession, setnu_ssession] = useState("");
 
+  
   // const handelsabmit =(event)=>{
   //   event.preventDefault();
   //   axios.put('http://localhost:3000/api/v1/sessions/add',{ses_name:name,img:img,video:video,details:details,center_id:center_id,evaluation:evaluation,price:price,session_time:session_time,nu_ssession:nu_ssession})
@@ -40,7 +41,7 @@ const Modelcenter = ({ closemodal }) => {
     });
 
     var requestOptions = {
-      method: "put",
+      method: "post",
       headers: myHeaders,
       body: raw,
       redirect: "follow",
@@ -112,6 +113,7 @@ const Modelcenter = ({ closemodal }) => {
             />
             <br />
           </div>
+          <div className="loglat">
           <div className="form-grop">
             <label htmlFor="name">price</label>
             <input
@@ -119,7 +121,7 @@ const Modelcenter = ({ closemodal }) => {
               id="price"
               onChange={(e) => setprice(e.target.value)}
             />
-            <br />
+        
           </div>
           <div className="form-grop">
             <label htmlFor="name">number</label>
@@ -128,7 +130,8 @@ const Modelcenter = ({ closemodal }) => {
               id="Center"
               onChange={(e) => setnu_ssession(e.target.value)}
             />
-            <br />
+          
+          </div>
           </div>
           <div className="form-grop">
             <label htmlFor="name">Center</label>
